@@ -47,7 +47,7 @@ data_2008 <- as_tibble(read_dta("Q8_New_08.dta", encoding = "VISCII")) %>%
         select(-p43q7_) %>% 
         distinct() %>% 
         right_join(data_2008, by = c("tinh_2008", "quan_2008", "xa_2008", "ma_h0_2008")) %>% 
-        mutate(loan = ifelse(is.na(loan) == TRUE, 0, loan))
+        mutate(loan = ifelse(is.na(loan) == TRUE, 0, loan)) # Loan
 
 data_2008 <- as_tibble(read_dta("Q2_New_08.dta", encoding = "VISCII")) %>% 
         select(tinh_2008, quan_2008, xa_2008, ma_h0_2008, p6q3_) %>% 
@@ -90,6 +90,7 @@ data_2008 <- as_tibble(read_dta("Q9b_New_08.dta", encoding = "VISCII")) %>%
 data_2008 %>% filter(year_born > 1972 & year_born < 1991) %>% 
         ungroup() %>% 
         count(head_relationship)
+
 # Outcome variables - Labor Market Outcomes -------------------------------
 
 outcome_2008 <- as_tibble(read_dta("Q5_New_08.dta", encoding = "VISCII")) %>% 
@@ -102,11 +103,3 @@ outcome_2008 <- as_tibble(read_dta("Q5_New_08.dta", encoding = "VISCII")) %>%
                house_work = p27q1e_)
 
 # Wage
-        
-names(loan)
-desc(loan)
-sum(loan)
-ggplot(loan) +
-        aes(x = p43q7_) +
-        geom_histogram(bins = 200)
-table(loan$p43q7_)
