@@ -84,22 +84,3 @@ data_2008 <- as_tibble(read_dta("Q9b_New_08.dta", encoding = "VISCII")) %>%
         distinct() %>% 
         right_join(data_2008, by = c("tinh_2008", "quan_2008", "xa_2008", "ma_h0_2008"))
 
-
-# 18-35 data --------------------------------------------------------------
-
-data_2008 %>% filter(year_born > 1972 & year_born < 1991) %>% 
-        ungroup() %>% 
-        count(head_relationship)
-
-# Outcome variables - Labor Market Outcomes -------------------------------
-
-outcome_2008 <- as_tibble(read_dta("Q5_New_08.dta", encoding = "VISCII")) %>% 
-        select(tinh_2008, quan_2008, xa_2008, ma_h0_2008, p27ma_,
-                p27ma_, p27q1a_, p27q1b_, p27q1c_, p27q1d_, p27q1e_) %>% 
-        rename(wage = p27q1a_,
-               agriculture = p27q1b_,
-               self_employed = p27q1c_,
-               common_property = p27q1d_,
-               house_work = p27q1e_)
-
-# Wage
